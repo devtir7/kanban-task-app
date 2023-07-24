@@ -1,0 +1,66 @@
+/* Set a consistent color for the slider and handle */
+.slider,
+.slider:before {
+  background-color: #635fc7;
+}
+
+/* Set the color and transition for the hover effect */
+.slider:hover,
+.checkbox:not(:checked) + .slider:hover {
+  background-color: #a8a4ff;
+  transition: 0.3s;
+}
+
+/* Simplify the styles for the minimal toggle switch with handle */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.checkbox {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 10px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.slider:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #fff;
+  transition: 0.3s;
+}
+
+/* Set the slider and handle color when the checkbox is checked */
+.checkbox:checked + .slider {
+  background-color: #635fc7;
+}
+
+.checkbox:checked + .slider:before {
+  left: calc(100% - 18px);
+}
+
+/* Set the slider and handle color when the checkbox is unchecked */
+.checkbox:not(:checked) + .slider {
+  background-color: #635fc7;
+}
+
+.checkbox:not(:checked) + .slider:before {
+  left: 2px;
+}
