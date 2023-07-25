@@ -4,15 +4,25 @@ import Modal from "react-overlays/Modal"
 import { TasksContext } from "../../contexts/TasksContext"
 import { ModalContext } from "../../contexts/ModalContext"
 
-export default function DeleteBoardModal() {
-  const { boardsData, selectedBoardIndex, deleteBoard } =
-    useContext(TasksContext)
+export default function DeleteTaskModal() {
+  const {
+    boardsData,
+    selectedBoardIndex,
+    selectedColumnIndex,
+    selectedTaskIndex,
+    deleteTask,
+  } = useContext(TasksContext)
   const { modal, closeModal } = useContext(ModalContext)
+
+  const selectedTask =
+    boardsData[selectedBoardIndex].columns[selectedColumnIndex].tasks[
+      selectedTaskIndex
+    ]
 
   const renderBackdrop = props => <div className="backdrop" {...props} />
 
   function handleDelete() {
-    deleteBoard(selectedBoardIndex)
+    deleteTask(selectedBoardIndex, selectedColumnIndex, selectedTaskIndex)
     closeModal()
   }
 
@@ -23,11 +33,10 @@ export default function DeleteBoardModal() {
       onHide={closeModal}
       renderBackdrop={renderBackdrop}>
       <div className="warning-delete">
-        <h1 className="heading-L">Delete this board?</h1>
+        <h1 className="heading-L">Delete this task?</h1>
         <p className="body-L">
-          Are you sure you want to delete the '
-          {boardsData[selectedBoardIndex].name}' board? This action will remove
-          all columns and tasks and cannot be reversed.
+          Are you sure you want to delete the '{selectedTask.title}' task and
+          its subtasks? This action cannot be reversed.
         </p>
         <div className="delete-button-container">
           <button className="delete-btn" onClick={handleDelete}>

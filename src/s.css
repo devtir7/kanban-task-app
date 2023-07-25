@@ -1,18 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-html,
-body {
-  font-family: "Plus Jakarta Sans", sans-serif;
-  margin: 0px;
-  padding: 0px;
-}
-
-#root {
-  min-height: 100vh;
-}
-
 /* HEADER */
 
 /* nav */
@@ -36,16 +21,11 @@ nav {
   z-index: 10000; /* Ensure it's above other elements */
 }
 
-.board-name {
-  display: flex;
+nav > h1 {
   margin-left: 1rem;
   margin-right: 0.5rem;
   font-size: 1.1rem;
   line-height: normal;
-}
-
-.board-name > h1 {
-  margin-right: 0.5rem;
 }
 
 nav > img {
@@ -56,21 +36,11 @@ nav > img {
   align-self: flex-start;
 }
 
-.board-name:hover {
-  cursor: pointer;
-}
-
 .add-task-mobile {
   margin-left: 4.75rem;
   border-radius: 1rem;
   margin-right: 1rem;
-
-  transition: 0.3s;
-}
-
-.add-task-mobile:hover {
-  cursor: pointer;
-  opacity: 0.25;
+  /* opacity: 0.25; */
 }
 
 /* BOARDS */
@@ -81,7 +51,6 @@ nav > img {
   flex-grow: 1;
   margin-top: 4.063rem;
   overflow-y: hidden;
-  height: 100vh;
 }
 
 .columns-row {
@@ -273,15 +242,6 @@ nav > img {
   opacity: 0.5;
 }
 
-.backdrop-edit {
-  position: fixed;
-  z-index: 1040;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
 /* LISTING BOARDS MOBILE MODAL */
 
 .modal-list-title {
@@ -407,7 +367,6 @@ button {
   border: 1px solid rgba(130, 143, 163, 0.25);
   background: #fff;
   padding-left: 1rem;
-  color: black;
 }
 
 .add-columns {
@@ -545,110 +504,6 @@ button {
 
 .delete-button-container > .delete-btn:hover {
   background: #ff9898;
-}
-
-/* ADD TASK MODAL */
-
-.task-description {
-  width: 295px;
-  height: 112px;
-  border: 1px solid rgba(130, 143, 163, 0.25);
-}
-
-.task-description::placeholder {
-  padding-top: 0.5rem;
-  padding-right: 0.7rem;
-}
-
-/* VIEW TASK MODAL */
-
-.task-details {
-  padding: 1.5rem;
-}
-
-.header {
-  display: flex;
-}
-
-.task-details > .header > .heading-L {
-  color: #000112;
-}
-
-.task-details > .body-L {
-  color: #828fa3;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.task-options {
-  margin-left: 1rem;
-}
-
-.task-options:hover {
-  cursor: pointer;
-}
-
-.subtasks-progress {
-  color: #828fa3;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: normal;
-  margin-bottom: 1rem;
-}
-
-.subtask {
-  margin-left: 1rem;
-}
-
-.checkbox-container {
-  display: flex;
-  align-items: center;
-
-  border-radius: 4px;
-  background: #f4f7fd;
-
-  color: #000112;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: normal;
-
-  margin: 0.5rem;
-  padding: 0.813rem;
-}
-
-input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-}
-input[type="checkbox"]:checked {
-  accent-color: #635fc7;
-}
-input[type="checkbox"]:checked + label {
-  text-decoration: line-through;
-  opacity: 0.5;
-}
-
-.current-status {
-  color: #828fa3;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.status-dropdown {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 1rem;
-  display: block;
-  padding-right: 8.5rem;
-  border-radius: 4px;
-  border: 1px solid rgba(130, 143, 163, 0.25);
-
-  color: #000112;
-
-  font-size: 13px;
-
-  font-weight: 500;
-  line-height: 23px; /* 176.923% */
 }
 
 /* MISC MODAL */

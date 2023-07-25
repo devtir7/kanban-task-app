@@ -3,16 +3,16 @@ import Modal from "react-overlays/Modal"
 
 import { ModalContext } from "../../contexts/ModalContext"
 
-export default function BoardOptionsModal() {
+export default function TaskOptionsModal() {
   const { modal, openModal, closeModal } = useContext(ModalContext)
   const renderBackdrop = props => <div className="backdrop-edit" {...props} />
   function handleSelection(selection) {
     closeModal()
 
     if (selection === "edit") {
-      openModal("edit-board")
+      openModal("edit-task-modal")
     } else if (selection === "delete") {
-      openModal("delete-board")
+      openModal("delete-task-modal")
     }
   }
 
@@ -24,10 +24,10 @@ export default function BoardOptionsModal() {
       renderBackdrop={renderBackdrop}>
       <div>
         <p className="body-L" onClick={() => handleSelection("edit")}>
-          Edit board
+          Edit task
         </p>
         <p className="body-L delete" onClick={() => handleSelection("delete")}>
-          Delete board
+          Delete task
         </p>
       </div>
     </Modal>
