@@ -58,9 +58,7 @@ export default function BoardListModal() {
         </div>
 
         <div className="modal-list-footer">
-          <img src={lightThemeIcon} />
           <ToggleSwitch />
-          <img src={darkThemeIcon} />
         </div>
       </div>
     </Modal>

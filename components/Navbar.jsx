@@ -3,7 +3,6 @@ import mobileLogo from "../assets/logo-mobile.svg"
 import downArrow from "../assets/icon-chevron-down.svg"
 import upArrow from "../assets/icon-chevron-up.svg"
 import ellipsis from "../assets/icon-vertical-ellipsis.svg"
-import addTaskMobile from "../assets/add-task-mobile.svg"
 
 import { TasksContext } from "../contexts/TasksContext"
 
@@ -26,7 +25,7 @@ export default function Navbar() {
     <nav>
       <img className="mobile-logo" src={mobileLogo} alt="kanban mobile logo" />
       <div className="board-name">
-        <h1 onClick={() => handleModal("list")}>
+        <h1 className="heading-L" onClick={() => handleModal("list")}>
           {boardsData[selectedBoardIndex]?.name}
         </h1>
 
@@ -37,12 +36,12 @@ export default function Navbar() {
           alt="arrow button to display all boards"
         />
       </div>
-      <img
+
+      <button
         className="add-task-mobile"
-        src={addTaskMobile}
-        alt="button to add new task"
-        onClick={() => openModal("add-task-modal")}
-      />
+        onClick={() => openModal("add-task-modal")}>
+        +
+      </button>
       <img
         className="ellipsis"
         src={ellipsis}

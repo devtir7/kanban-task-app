@@ -4,7 +4,7 @@ import { ModalContext } from "../../contexts/ModalContext"
 import { TasksContext } from "../../contexts/TasksContext"
 import ellipsis from "../../assets/icon-vertical-ellipsis.svg"
 
-export default function ViewTaskModal() {
+export default function ViewTaskModal({ theme }) {
   const renderBackdrop = props => <div className="backdrop" {...props} />
 
   const { modal, openModal, closeModal } = useContext(ModalContext)
@@ -64,7 +64,7 @@ export default function ViewTaskModal() {
 
   return (
     <Modal
-      className="modal"
+      className={`modal ${theme}`}
       show={modal.isOpen}
       onHide={handleClose}
       renderBackdrop={renderBackdrop}>

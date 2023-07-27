@@ -1,23 +1,29 @@
-import {useState, useEffect, useContext} from "react"
+import { useState, useEffect, useContext } from "react"
 
 import { TasksContext } from "../contexts/TasksContext"
 import Task from "./Task"
 
-export default function Boards() {
-    const { boardsData, selectedBoardIndex } = useContext(TasksContext)
+import iconShowSidebar from "../assets/badge-show-sidebar.svg"
 
-    return boardsData ? (
-        <div className="boards">
-            <Task
-                key={boardsData[selectedBoardIndex].id}
-                value={boardsData[selectedBoardIndex]}
-            />
+export default function Boards({ sidebarHidden, handleSidebar }) {
+  const { boardsData, selectedBoardIndex } = useContext(TasksContext)
 
-        </div>
-    ) : (
-        <div className="boards-empty">
-            <p className="heading-L">This board is empty. Create a new column to get started.</p>
-            <button className="button-primary-L">+ Add New Column</button>
-        </div>
-    )
+  return (
+    <div className="boards">
+      <div className="boards-wrapper">
+        <Task
+          key={boardsData[selectedBoardIndex].id}
+          value={boardsData[selectedBoardIndex]}
+        />
+      </div>
+
+      {sidebarHidden && <img src={iconShowSidebar} onClick={handleSidebar} />}
+    </div>
+  )
 }
+
+// +--------+-----------+
+// |         | NAVBAR    |
+// + SIDEBAR |-----------+
+// |         |           |
+// +--------+-----------+

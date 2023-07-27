@@ -17,13 +17,13 @@ export default function Task(props) {
     openModal("view-task-modal")
   }
 
-  return (
+  return board.columns ? (
     <div className="columns-row">
       {board.columns.map((column, colIndex) => {
         return (
           <div key={column.id} className="column">
             <img src={todoIcon} />
-            <p className="heading-S">{column.name}</p>
+            <p className="column-name heading-S">{column.name.toUpperCase()}</p>
 
             {column.tasks.map((task, taskIndex) => {
               const subTasksCount = task.subtasks.filter(
@@ -34,8 +34,8 @@ export default function Task(props) {
                   key={task.id}
                   className="task"
                   onClick={() => handleViewTask(colIndex, taskIndex)}>
-                  <div className="heading-M">{task.title}</div>
-                  <div className="body-M">
+                  <div className="task-title heading-M">{task.title}</div>
+                  <div className="task-body body-M">
                     {subTasksCount} of {task.subtasks.length} subtasks
                   </div>
                 </div>
@@ -44,6 +44,13 @@ export default function Task(props) {
           </div>
         )
       })}
+    </div>
+  ) : (
+    <div className="boards-empty">
+      <p className="heading-L">
+        This board is empty. Create a new column to get started.
+      </p>
+      <button className="button-primary-L">+ Add New Column</button>
     </div>
   )
 }
