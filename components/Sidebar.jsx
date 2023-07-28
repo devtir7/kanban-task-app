@@ -4,11 +4,9 @@ import iconHideSidebar from "../assets/icon-hide-sidebar.svg"
 
 import { useContext } from "react"
 import { TasksContext } from "../contexts/TasksContext"
-import { ThemeContext } from "../contexts/ThemeContext"
 import { ModalContext } from "../contexts/ModalContext"
 
 export default function Sidebar({ sidebarHidden, handleSidebar }) {
-  const { theme } = useContext(ThemeContext)
   const { boardsData, selectedBoardIndex, setSelectedBoardIndex } =
     useContext(TasksContext)
   const { openModal } = useContext(ModalContext)
@@ -29,7 +27,6 @@ export default function Sidebar({ sidebarHidden, handleSidebar }) {
   })
 
   return (
-    // top section
     <div className="sidebar">
       {!sidebarHidden && (
         <div className={`sidebar-content`}>

@@ -389,15 +389,6 @@ nav > img {
   opacity: 0.5;
 }
 
-.backdrop-edit {
-  position: fixed;
-  z-index: 5;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
 /* LISTING BOARDS MOBILE MODAL */
 
 .modal-list-title {
@@ -914,22 +905,6 @@ input[type="checkbox"]:checked + label {
   margin-top: 0;
 }
 
-/* MEDIA QUERIES */
-
-@media (max-width: 768px) {
-  .sidebar,
-  .kanban-logo,
-  .show-sidebar-badge,
-  .add-column-bar {
-    display: none;
-  }
-
-  .boards {
-    height: calc(100vh);
-    padding-top: 4rem;
-  }
-}
-
 .show-sidebar-badge {
   cursor: pointer;
 }
@@ -950,6 +925,21 @@ input[type="checkbox"]:checked + label {
     "boards boards";
 
   border-bottom: 1px solid var(--sectionBorder);
+}
+
+/* MEDIA QUERIES */
+
+@media (max-width: 768px) {
+  .sidebar,
+  .kanban-logo,
+  .show-sidebar-badge {
+    display: none;
+  }
+
+  .boards {
+    height: calc(100vh);
+    padding-top: 4rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -1013,6 +1003,18 @@ input[type="checkbox"]:checked + label {
 
   .board-arrow {
     display: none;
+  }
+}
+
+@media (max-width: 1290px) {
+  .add-column-bar {
+    display: none;
+  }
+}
+
+@media (max-width: 1340px) {
+  .add-column-bar {
+    text-align: center;
   }
 }
 

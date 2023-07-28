@@ -34,10 +34,8 @@ export default function Navbar({ theme }) {
       </div>
 
       <img className="mobile-logo" src={mobileLogo} alt="kanban mobile logo" />
-      <div className="board-name">
-        <h1 className="heading-L" onClick={() => handleModal("list")}>
-          {boardsData[selectedBoardIndex]?.name}
-        </h1>
+      <div className="board-name" onClick={() => handleModal("list")}>
+        <h1 className="heading-L">{boardsData[selectedBoardIndex]?.name}</h1>
 
         <img
           className="board-arrow"

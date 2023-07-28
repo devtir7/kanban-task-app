@@ -10,19 +10,23 @@ import { TasksContext } from "../../contexts/TasksContext"
 import { ModalContext } from "../../contexts/ModalContext"
 
 export default function BoardListModal({ theme }) {
-  const { boardsData, setSelectedBoardIndex } = useContext(TasksContext)
+  const { boardsData, selectedBoardIndex, setSelectedBoardIndex } =
+    useContext(TasksContext)
 
   const { modal, openModal, closeModal } = useContext(ModalContext)
 
   const renderBackdrop = props => <div className="backdrop" {...props} />
 
   const boardsEl = boardsData?.map((board, index) => {
+    const selectedBoard =
+      board === boardsData[selectedBoardIndex] ? "selected-board" : ""
     return (
-      <div key={board.id} className="modal-list-board-item">
+      <div
+        key={board.id}
+        className={`modal-list-board-item ${selectedBoard}`}
+        onClick={() => setSelectedBoardIndex(index)}>
         <img src={boardIcon} />
-        <p className="heading-M" onClick={() => setSelectedBoardIndex(index)}>
-          {board.name}
-        </p>
+        <p className="heading-M">{board.name}</p>
         <br />
       </div>
     )
