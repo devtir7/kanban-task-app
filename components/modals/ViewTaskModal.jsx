@@ -80,9 +80,11 @@ export default function ViewTaskModal({ theme }) {
         </section>
         <p className="body-L">{selectedTask.description} </p>
 
-        <p className="subtasks-progress">
-          Subtasks ({subTasksCount} of {selectedTask.subtasks.length})
-        </p>
+        {subTasksCount > 0 && (
+          <p className="subtasks-progress">
+            Subtasks ({subTasksCount} of {selectedTask.subtasks.length})
+          </p>
+        )}
 
         <form>
           {selectedTask.subtasks.map((subtask, index) => {

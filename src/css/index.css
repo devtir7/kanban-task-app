@@ -732,8 +732,13 @@ button {
   display: flex;
 }
 
+.task-details > .header {
+  display: flex;
+  justify-content: space-between;
+}
+
 .task-details > .header > .heading-L {
-  color: #000112;
+  color: var(--primaryText);
 }
 
 .task-details > .body-L {
