@@ -23,6 +23,7 @@ export default function BoardOptionsModal({ theme }) {
       onHide={closeModal}
       renderBackdrop={renderBackdrop}>
       <div>
+        <h1 className="heading-L">Board actions</h1>
         <p className="body-L" onClick={() => handleSelection("edit")}>
           Edit board
         </p>

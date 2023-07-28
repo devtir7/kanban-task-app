@@ -23,6 +23,7 @@ export default function TaskOptionsModal({ theme }) {
       onHide={closeModal}
       renderBackdrop={renderBackdrop}>
       <div>
+        <h1 className="heading-L">Task actions</h1>
         <p className="body-L" onClick={() => handleSelection("edit")}>
           Edit task
         </p>
