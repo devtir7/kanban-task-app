@@ -1,4 +1,5 @@
 # kanban-task-app
+
 **Overview:**
 
 The Kanban Task Management App is a full-fledged task organization and management tool designed and developed as part of the level 5 Guru challenge from Frontend Mentor. It allows users to keep track of their tasks, organize them into different boards, and manage their progress efficiently using the Kanban board approach.
@@ -25,3 +26,5 @@ Context API: Part of React, it provides a state management solution without the 
 HTML & CSS: For structuring the app's layout and styling the user interface to deliver an intuitive and visually appealing experience.
 
 Responsive Web Design: Using media queries and flexible layouts to ensure the app is fully functional and visually pleasing on various devices and screen sizes.
+
+DEMO: https://kanban-aatir.netlify.app/
