@@ -12,11 +12,12 @@ Task Creation: Users can create new tasks by entering the task details, such as 
 
 Task Editing & Deletion: Tasks can be easily edited or deleted by clicking on the task card and accessing the edit/delete options.
 
-Context API: The app effectively manages the state and data of the Kanban board using React's Context API. This ensures a smooth and efficient flow of data between components.
+Context API: The app effectively manages the state and data of the Kanban board using React's Context API. This ensures a smooth and efficient flow of data between components. It is also used for task and board management in the app.
 
 Responsive Design: The app is built with a mobile-first approach and is fully responsive, providing an optimal viewing and interactive experience across various devices and screen sizes. It adapts to both mobile and desktop screens.
 
-Tech Stack:
+**Tech Stack:**
+
 The Kanban Task Management App utilizes the following technologies:
 
 React: A popular JavaScript library for building user interfaces, allowing for efficient component-based development.
