@@ -1,8 +1,6 @@
 import { useContext } from "react"
 import Modal from "react-overlays/Modal"
 
-import darkThemeIcon from "../../assets/icon-dark-theme.svg"
-import lightThemeIcon from "../../assets/icon-light-theme.svg"
 import boardIcon from "../../assets/icon-board.svg"
 
 import ToggleSwitch from "../ToggleSwitch"
@@ -11,7 +9,7 @@ import { TasksContext } from "../../contexts/TasksContext"
 
 import { ModalContext } from "../../contexts/ModalContext"
 
-export default function BoardListModal() {
+export default function BoardListModal({ theme }) {
   const { boardsData, setSelectedBoardIndex } = useContext(TasksContext)
 
   const { modal, openModal, closeModal } = useContext(ModalContext)
@@ -37,7 +35,7 @@ export default function BoardListModal() {
 
   return (
     <Modal
-      className="modal"
+      className={`modal ${theme}`}
       show={modal?.isOpen}
       onHide={closeModal}
       renderBackdrop={renderBackdrop}>

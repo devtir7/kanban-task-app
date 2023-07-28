@@ -7,8 +7,8 @@ import { nanoid } from "nanoid"
 import { TasksContext } from "../../contexts/TasksContext"
 import { ModalContext } from "../../contexts/ModalContext"
 
-export default function AddTaskModal() {
-  const { selectedBoardIndex, addTask } = useContext(TasksContext)
+export default function AddTaskModal({ theme }) {
+  const { boardsData, selectedBoardIndex, addTask } = useContext(TasksContext)
   const { modal, closeModal } = useContext(ModalContext)
 
   const renderBackdrop = props => <div className="backdrop" {...props} />
@@ -91,7 +91,7 @@ export default function AddTaskModal() {
 
   return (
     <Modal
-      className="modal modal-add-board"
+      className={`modal modal-add-board ${theme}`}
       show={modal.isOpen}
       onHide={closeModal}
       renderBackdrop={renderBackdrop}>
@@ -108,6 +108,7 @@ export default function AddTaskModal() {
                 name="title"
                 placeholder="e.g. Take coffee break"
                 onChange={handleChange}
+                required
               />
             </label>
 
@@ -124,7 +125,6 @@ export default function AddTaskModal() {
 
             <div className="add-columns">
               <p>Subtasks</p>
-
               {formData?.subtasks.map((subtask, index) => {
                 return (
                   <div key={index} className="col">
@@ -144,26 +144,30 @@ export default function AddTaskModal() {
                   </div>
                 )
               })}
-
               <button className="button-secondary" onClick={addSubtask}>
                 + Add New Subtask
               </button>
-
-              <label>
+              <label className="subscript-text" forhtml="status">
                 Status
-                <select
-                  className="form-text-input body-L"
-                  name="status"
-                  value={formData.status}
-                  onChange={handleChange}>
-                  <option disabled value="">
-                    Choose status
-                  </option>
-                  <option value="todo">Todo</option>
-                  <option value="doing">Doing</option>
-                  <option value="done">Done</option>
-                </select>
               </label>
+              <select
+                id="status"
+                className="form-text-input body-L"
+                name="status"
+                value={formData.status}
+                onChange={handleChange}
+                required>
+                <option disabled value="">
+                  Choose status
+                </option>
+                {boardsData[selectedBoardIndex].columns.map(column => {
+                  return (
+                    <option value={column.name.toString()}>
+                      {column.name}
+                    </option>
+                  )
+                })}
+              </select>
             </div>
             <button className="button-primary-S">Create Task</button>
           </form>

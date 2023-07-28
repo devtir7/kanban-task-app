@@ -4,7 +4,7 @@ import Modal from "react-overlays/Modal"
 import { TasksContext } from "../../contexts/TasksContext"
 import { ModalContext } from "../../contexts/ModalContext"
 
-export default function DeleteBoardModal() {
+export default function DeleteBoardModal({ theme }) {
   const { boardsData, selectedBoardIndex, deleteBoard } =
     useContext(TasksContext)
   const { modal, closeModal } = useContext(ModalContext)
@@ -18,11 +18,11 @@ export default function DeleteBoardModal() {
 
   return (
     <Modal
-      className="modal warning-delete"
+      className={`modal warning-delete ${theme}`}
       show={modal.isOpen}
       onHide={closeModal}
       renderBackdrop={renderBackdrop}>
-      <div className="warning-delete">
+      <div className="modal-content">
         <h1 className="heading-L">Delete this board?</h1>
         <p className="body-L">
           Are you sure you want to delete the '

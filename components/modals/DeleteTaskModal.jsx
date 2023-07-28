@@ -4,7 +4,7 @@ import Modal from "react-overlays/Modal"
 import { TasksContext } from "../../contexts/TasksContext"
 import { ModalContext } from "../../contexts/ModalContext"
 
-export default function DeleteTaskModal() {
+export default function DeleteTaskModal({ theme }) {
   const {
     boardsData,
     selectedBoardIndex,
@@ -28,11 +28,11 @@ export default function DeleteTaskModal() {
 
   return (
     <Modal
-      className="modal warning-delete"
+      className={`modal warning-delete ${theme}`}
       show={modal.isOpen}
       onHide={closeModal}
       renderBackdrop={renderBackdrop}>
-      <div className="warning-delete">
+      <div className="modal-content">
         <h1 className="heading-L">Delete this task?</h1>
         <p className="body-L">
           Are you sure you want to delete the '{selectedTask.title}' task and

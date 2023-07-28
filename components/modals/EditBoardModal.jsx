@@ -7,7 +7,7 @@ import { ModalContext } from "../../contexts/ModalContext"
 
 import delColumnIcon from "../../assets/delete-column.svg"
 
-export default function EditBoardModal() {
+export default function EditBoardModal({ theme }) {
   const { boardsData, selectedBoardIndex, editBoard } = useContext(TasksContext)
   const { modal, closeModal } = useContext(ModalContext)
 
@@ -83,7 +83,7 @@ export default function EditBoardModal() {
 
   return (
     <Modal
-      className="modal modal-edit-board"
+      className={`modal modal-edit-board ${theme}`}
       show={modal.isOpen}
       onHide={closeModal}
       renderBackdrop={renderBackdrop}>
@@ -100,6 +100,7 @@ export default function EditBoardModal() {
                 name="name"
                 defaultValue={formData.name}
                 onChange={handleChange}
+                required
               />
             </label>
 
@@ -112,9 +113,9 @@ export default function EditBoardModal() {
                     <input
                       className="column-input body-L"
                       type="text"
-                      name={`columns-${index}`} // Use a unique name for each input field
-                      value={column.name} // Use value prop instead of defaultValue
-                      onChange={handleChange} // Use onChange prop
+                      name={`columns-${index}`}
+                      value={column.name}
+                      onChange={handleChange}
                       data-index={index}
                     />
                     <img

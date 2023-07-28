@@ -1,8 +1,12 @@
 import { useState, useContext } from "react"
-import "../src/ToggleSwitch.css"
+
 import { ThemeContext } from "../contexts/ThemeContext.jsx"
+
 import darkThemeIcon from "../assets/icon-dark-theme.svg"
 import lightThemeIcon from "../assets/icon-light-theme.svg"
+
+import "../src/css/ToggleSwitch.css"
+
 export default function ToggleSwitch() {
   const [isChecked, setIsChecked] = useState(false)
 
@@ -14,7 +18,7 @@ export default function ToggleSwitch() {
   }
 
   return (
-    <>
+    <div className="toggle-footer">
       <img src={lightThemeIcon} />
       <label className={`toggle-switch ${isChecked ? "checked" : ""}`}>
         <input
@@ -26,6 +30,6 @@ export default function ToggleSwitch() {
         <span className="slider" />
       </label>
       <img src={darkThemeIcon} />
-    </>
+    </div>
   )
 }

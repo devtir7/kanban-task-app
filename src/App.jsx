@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react"
+import { useState, useContext } from "react"
 
 import Sidebar from "../components/Sidebar.jsx"
 import Navbar from "../components/Navbar.jsx"
@@ -20,7 +20,7 @@ import { ModalContext } from "../contexts/ModalContext.jsx"
 import { ThemeContext } from "../contexts/ThemeContext.jsx"
 
 export default function App() {
-  const { modal, openModal } = useContext(ModalContext)
+  const { modal } = useContext(ModalContext)
 
   const { theme } = useContext(ThemeContext)
 
@@ -37,40 +37,23 @@ export default function App() {
     "delete-task-modal": <DeleteTaskModal theme={theme} />,
   }
 
-  const [gridTemplateAreas, setGridTemplateAreas] = useState(`
-    "kanban nav"
-    "sidebar boards"
-  `)
-
   const [sidebarHidden, setSidebarHidden] = useState(false)
 
   function handleSidebar() {
     setSidebarHidden(prev => !prev)
   }
 
-  useEffect(() => {
-    if (sidebarHidden) {
-      setGridTemplateAreas(`
-      "kanban nav"
-      "boards boards";
-    `)
-    } else {
-      setGridTemplateAreas(`
-      "kanban nav"
-      "sidebar boards";
-    `)
-    }
-  }, [sidebarHidden])
-
   return (
-    <div
-      className={`${theme} grid-container ${
-        sidebarHidden ? "hide-sidebar" : "show-sidebar"
-      }`}>
-      <Sidebar sidebarHidden={sidebarHidden} handleSidebar={handleSidebar} />
-      <Navbar />
-      <Boards sidebarHidden={sidebarHidden} handleSidebar={handleSidebar} />
+    <>
+      <div
+        className={`${theme} grid-container ${
+          sidebarHidden ? "hide-sidebar" : "show-sidebar"
+        }`}>
+        <Sidebar sidebarHidden={sidebarHidden} handleSidebar={handleSidebar} />
+        <Navbar theme={theme} />
+        <Boards sidebarHidden={sidebarHidden} handleSidebar={handleSidebar} />
+      </div>
       {modal.isOpen && modalComponents[modal.type]}
-    </div>
+    </>
   )
 }

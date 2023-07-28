@@ -28,7 +28,8 @@ export default function ThemeProvider({ children }) {
 
   //get theme as soon as webapp loads
   useEffect(() => {
-    setTheme(getTheme)
+    const theme = getTheme()
+    setTheme(theme)
   }, [])
 
   //when theme value is changed, set the changes to localStorage

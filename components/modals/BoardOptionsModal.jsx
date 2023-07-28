@@ -3,9 +3,9 @@ import Modal from "react-overlays/Modal"
 
 import { ModalContext } from "../../contexts/ModalContext"
 
-export default function BoardOptionsModal() {
+export default function BoardOptionsModal({ theme }) {
   const { modal, openModal, closeModal } = useContext(ModalContext)
-  const renderBackdrop = props => <div className="backdrop-edit" {...props} />
+  const renderBackdrop = props => <div className="backdrop" {...props} />
   function handleSelection(selection) {
     closeModal()
 
@@ -18,7 +18,7 @@ export default function BoardOptionsModal() {
 
   return (
     <Modal
-      className="modal modify-board"
+      className={`modal modify-board ${theme}`}
       show={modal.isOpen}
       onHide={closeModal}
       renderBackdrop={renderBackdrop}>

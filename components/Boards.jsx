@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react"
+import { useContext } from "react"
 
 import { TasksContext } from "../contexts/TasksContext"
 import Task from "./Task"
@@ -10,20 +10,18 @@ export default function Boards({ sidebarHidden, handleSidebar }) {
 
   return (
     <div className="boards">
-      <div className="boards-wrapper">
-        <Task
-          key={boardsData[selectedBoardIndex].id}
-          value={boardsData[selectedBoardIndex]}
-        />
-      </div>
+      <Task
+        key={boardsData[selectedBoardIndex].id}
+        value={boardsData[selectedBoardIndex]}
+      />
 
-      {sidebarHidden && <img src={iconShowSidebar} onClick={handleSidebar} />}
+      {sidebarHidden && (
+        <img
+          className="show-sidebar-badge"
+          src={iconShowSidebar}
+          onClick={handleSidebar}
+        />
+      )}
     </div>
   )
 }
-
-// +--------+-----------+
-// |         | NAVBAR    |
-// + SIDEBAR |-----------+
-// |         |           |
-// +--------+-----------+

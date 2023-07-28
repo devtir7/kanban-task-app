@@ -2,12 +2,10 @@ import { useState, useEffect, useContext } from "react"
 import delColumnIcon from "../../assets/delete-column.svg"
 import Modal from "react-overlays/Modal"
 
-import { nanoid } from "nanoid"
-
 import { TasksContext } from "../../contexts/TasksContext"
 import { ModalContext } from "../../contexts/ModalContext"
 
-export default function EditTaskModal() {
+export default function EditTaskModal({ theme }) {
   const {
     boardsData,
     selectedBoardIndex,
@@ -98,7 +96,7 @@ export default function EditTaskModal() {
 
   return (
     <Modal
-      className="modal modal-add-board"
+      className={`modal modal-add-board ${theme}`}
       show={modal.isOpen}
       onHide={closeModal}
       renderBackdrop={renderBackdrop}>
@@ -116,12 +114,13 @@ export default function EditTaskModal() {
                 value={taskData.title}
                 placeholder="e.g. Take coffee break"
                 onChange={handleChange}
+                required
               />
             </label>
 
             <label>
               Description
-              <input
+              <textarea
                 className="form-text-input body-L task-description"
                 type="text"
                 name="description"
@@ -158,16 +157,21 @@ export default function EditTaskModal() {
                 + Add New Subtask
               </button>
 
-              <label>
+              <label className="subscript-text">
                 Status
                 <select
                   className="form-text-input body-L"
                   name="status"
                   defaultValue={taskData.status}
-                  onChange={handleChange}>
-                  <option value="Todo">Todo</option>
-                  <option value="Doing">Doing</option>
-                  <option value="Done">Done</option>
+                  onChange={handleChange}
+                  required>
+                  {boardsData[selectedBoardIndex].columns.map(column => {
+                    return (
+                      <option value={column.name.toString()}>
+                        {column.name}
+                      </option>
+                    )
+                  })}
                 </select>
               </label>
             </div>

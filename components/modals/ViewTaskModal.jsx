@@ -10,6 +10,7 @@ export default function ViewTaskModal({ theme }) {
   const { modal, openModal, closeModal } = useContext(ModalContext)
   const {
     boardsData,
+    setBoardsData,
     selectedBoardIndex,
     selectedColumnIndex,
     selectedTaskIndex,
@@ -35,19 +36,19 @@ export default function ViewTaskModal({ theme }) {
   const [statusChanged, setStatusChanged] = useState(false)
 
   function handleChange(e) {
-    const { name, value, checked } = e.target
+    const { name, value, checked, dataset } = e.target
 
     if (name === "status") {
       setCurrentStatus(value)
       setStatusChanged(true)
     } else if (name === "isCompleted") {
-      const subtaskIndex = Number(e.target.dataset.index)
+      const subtaskIndex = Number(dataset.index)
 
       // Call the updateSubtaskStatus function from the context
       updateSubtaskStatus(
         selectedBoardIndex,
-        selectedTaskIndex,
         selectedColumnIndex,
+        selectedTaskIndex,
         subtaskIndex,
         checked
       )
@@ -64,7 +65,7 @@ export default function ViewTaskModal({ theme }) {
 
   return (
     <Modal
-      className={`modal ${theme}`}
+      className={`modal modal-view ${theme}`}
       show={modal.isOpen}
       onHide={handleClose}
       renderBackdrop={renderBackdrop}>
@@ -109,13 +110,15 @@ export default function ViewTaskModal({ theme }) {
           <label className="current-status">
             Current Status
             <select
-              className="status-dropdown"
+              className="status-dropdown body-L"
               name="status"
               value={currentStatus}
               onChange={handleChange}>
-              <option value="Todo">Todo</option>
-              <option value="Doing">Doing</option>
-              <option value="Done">Done</option>
+              {boardsData[selectedBoardIndex].columns.map(column => {
+                return (
+                  <option value={column.name.toString()}>{column.name}</option>
+                )
+              })}
             </select>
           </label>
         </form>

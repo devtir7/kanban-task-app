@@ -4,13 +4,6 @@ import data from "../data.json"
 
 const TasksContext = createContext()
 
-//this context needs to have all the relevant board-related functions that can then be passed to all other components
-
-//this should store all of the data for each of the boards
-//and have a function that detects when a new board has been selected
-//and update the 'selectedID'
-//and load the data for that board
-
 function getBoards() {
   return data.boards
 }
@@ -118,17 +111,17 @@ export default function TasksProvider({ children }) {
     setBoardsData(prevBoardsData => {
       const updatedBoardsData = [...prevBoardsData]
       const selectedBoard = updatedBoardsData[boardIndex]
-      const selectedTask = selectedBoard.columns[colIndex].tasks[taskIndex]
+      const selectedTask = selectedBoard.columns[colIndex]?.tasks[taskIndex]
 
-      const updatedSubtasks = selectedTask.subtasks.map((subtask, index) =>
-        index === subtaskIndex ? { ...subtask, isCompleted } : subtask
-      )
+      if (selectedTask) {
+        const updatedSubtasks = selectedTask.subtasks.map((subtask, index) =>
+          index === subtaskIndex ? { ...subtask, isCompleted } : subtask
+        )
 
-      selectedTask.subtasks = updatedSubtasks
-
-      selectedBoard.columns[colIndex].tasks[taskIndex] = selectedTask
-
-      updatedBoardsData[boardIndex] = selectedBoard
+        selectedTask.subtasks = updatedSubtasks
+        selectedBoard.columns[colIndex].tasks[taskIndex] = selectedTask
+        updatedBoardsData[boardIndex] = selectedBoard
+      }
 
       return updatedBoardsData
     })
@@ -163,13 +156,11 @@ export default function TasksProvider({ children }) {
     })
   }
 
-  React.useEffect(() => console.log(boardsData), [boardsData])
-  // React.useEffect(() => console.log(boardsData.columns), [boardsData.columns])
-
   return (
     <TasksContext.Provider
       value={{
         boardsData,
+        setBoardsData,
         addBoard,
         selectedBoardIndex,
         setSelectedBoardIndex,

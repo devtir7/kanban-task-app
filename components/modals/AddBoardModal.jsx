@@ -7,7 +7,7 @@ import { nanoid } from "nanoid"
 import { TasksContext } from "../../contexts/TasksContext"
 import { ModalContext } from "../../contexts/ModalContext"
 
-export default function AddBoardModal() {
+export default function AddBoardModal({ theme }) {
   const { addBoard } = useContext(TasksContext)
   const { modal, closeModal } = useContext(ModalContext)
 
@@ -15,51 +15,51 @@ export default function AddBoardModal() {
 
   const [formData, setFormData] = useState({
     name: "",
-    columns: ["Todo", "Doing"],
+    columns: [
+      {
+        name: "Todo",
+        tasks: [
+          {
+            title: "",
+            description: "",
+            status: "",
+            subtasks: [],
+          },
+        ],
+      },
+      {
+        name: "Doing",
+        tasks: [
+          {
+            title: "",
+            description: "",
+            status: "",
+            subtasks: [],
+          },
+        ],
+      },
+    ],
   })
 
-  function handleChange(e) {
-    console.log(e.target.value)
+  function handleChange(e, columnIndex) {
     const { name, value } = e.target
-    console.log(name)
 
     if (name === "columns") {
-      // If the change is in the columns array (adding/removing columns)
       const updatedColumns = formData.columns.slice() // Create a copy of the columns array
 
-      // If the input field value is empty, remove the column
-      if (value === "") {
-        const columnIndex = parseInt(e.target.dataset.index, 10) // Get the index of the column
-        updatedColumns.splice(columnIndex, 1) // Remove the column from the array
+      // Update the name property of the specific column
+      updatedColumns[columnIndex].name = value
 
-        setFormData(prev => {
-          return {
-            ...prev,
-            columns: updatedColumns, // Update the columns in the formData
-          }
-        })
-      } else {
-        // If the input field has a value, update the column
-        const columnIndex = parseInt(e.target.dataset.index, 10)
-        updatedColumns[columnIndex] = value // Update the column in the array
-
-        setFormData(prev => {
-          return {
-            ...prev,
-            columns: updatedColumns, // Update the columns in the formData
-          }
-        })
-      }
+      setFormData(prev => ({
+        ...prev,
+        columns: updatedColumns,
+      }))
     } else if (name === "name") {
       // If the change is for other fields (e.g., board name)
-      console.log("Input value:", value)
-      setFormData(prev => {
-        return {
-          ...prev,
-          [name]: value,
-        }
-      })
-      console.log("formData.name:", formData.name)
+      setFormData(prev => ({
+        ...prev,
+        [name]: value,
+      }))
     }
   }
 
@@ -79,19 +79,19 @@ export default function AddBoardModal() {
   function addColumn(e) {
     e.preventDefault()
 
-    setFormData(prev => {
-      return {
-        ...prev,
-        columns: [...prev.columns, ""],
-      }
-    })
+    setFormData(prev => ({
+      ...prev,
+      columns: [...prev.columns, { name: "", tasks: [] }],
+    }))
   }
 
   function handleSubmit(e) {
+    e.preventDefault()
+    console.log(formData.columns)
     const newBoard = {
       name: formData.name,
-      columns: formData.columns.map(columnName => ({
-        name: columnName,
+      columns: formData.columns.map(column => ({
+        name: column.name,
         tasks: [],
       })),
       id: nanoid(),
@@ -103,7 +103,7 @@ export default function AddBoardModal() {
 
   return (
     <Modal
-      className="modal modal-add-board"
+      className={`modal modal-add-board ${theme}`}
       show={modal.isOpen}
       onHide={closeModal}
       renderBackdrop={renderBackdrop}>
@@ -120,6 +120,7 @@ export default function AddBoardModal() {
                 name="name"
                 placeholder="e.g. Web Design"
                 onChange={handleChange}
+                required
               />
             </label>
 
@@ -133,9 +134,8 @@ export default function AddBoardModal() {
                       className="column-input body-L"
                       type="text"
                       name="columns"
-                      defaultValue={column}
-                      placeholder={column}
-                      onChange={handleChange}
+                      value={formData.columns[index].name}
+                      onChange={e => handleChange(e, index)}
                     />
                     <img
                       className="column-delete"
@@ -150,7 +150,9 @@ export default function AddBoardModal() {
                 + Add New Column
               </button>
             </div>
-            <button className="button-primary-S">Create New Board</button>
+            <button type="submit" className="button-primary-S">
+              Create New Board
+            </button>
           </form>
         </div>
       </div>

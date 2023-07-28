@@ -1,9 +1,7 @@
-import { nanoid } from "nanoid"
-import todoIcon from "../assets/icon-todo.svg"
-
 import { useContext } from "react"
 import { TasksContext } from "../contexts/TasksContext"
 import { ModalContext } from "../contexts/ModalContext"
+import todoIcon from "../assets/icon-todo.svg"
 
 export default function Task(props) {
   const board = props.value
@@ -17,13 +15,15 @@ export default function Task(props) {
     openModal("view-task-modal")
   }
 
-  return board.columns ? (
-    <div className="columns-row">
+  return !(board.columns.length === 0) ? (
+    <div className="columns-row" key={1 + Math.random()}>
       {board.columns.map((column, colIndex) => {
         return (
           <div key={column.id} className="column">
             <img src={todoIcon} />
-            <p className="column-name heading-S">{column.name.toUpperCase()}</p>
+            <p className="column-name heading-S">
+              {column.name?.toUpperCase()}
+            </p>
 
             {column.tasks.map((task, taskIndex) => {
               const subTasksCount = task.subtasks.filter(
@@ -44,41 +44,22 @@ export default function Task(props) {
           </div>
         )
       })}
+      <div
+        className="add-column-bar heading-XL"
+        onClick={() => openModal("edit-board")}>
+        + New Column
+      </div>
     </div>
   ) : (
     <div className="boards-empty">
       <p className="heading-L">
         This board is empty. Create a new column to get started.
       </p>
-      <button className="button-primary-L">+ Add New Column</button>
+      <button
+        className="button-primary-L"
+        onClick={() => openModal("edit-board")}>
+        + Add New Column
+      </button>
     </div>
   )
 }
-
-// import todoIcon from "../assets/icon-todo.svg"
-
-// export default function Task(props) {
-//     const board = props.value
-
-//     return (
-//         <div className="columns-row">
-//             {board.columns.map(column => {
-//                 return (
-//                 <div key={column.name} className="column">
-//                     <img src={todoIcon} />
-//                     <p className="heading-S">{column.name}</p>
-
-//                     {column.tasks.map(task => {
-//                         const subTasksCount = task.subtasks.filter(subtask => subtask.isCompleted === true).length
-//                         return (
-//                             <div key={task.id} className="task">
-//                                 <div className="heading-M">{task.title}</div>
-//                                 <div className="body-M">{subTasksCount} of {task.subtasks.length} subtasks</div>
-//                             </div>
-//                         )
-//                     })}
-//                 </div>)
-//             })}
-//         </div>
-//     )
-// }
